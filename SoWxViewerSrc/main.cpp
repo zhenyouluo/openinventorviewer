@@ -1,14 +1,3 @@
-/////////////////////////////////////////////////////////////////////////////
-// Name:        main.cpp
-// Purpose:     SoWxViewer demo program
-// Author:      Morgan Leborgne
-// Modified by:
-// Created:     24/04/2007
-// RCS-ID:      
-// Copyright:   (c) Morgan Leborgne
-// Licence:     wxWindows licence
-/////////////////////////////////////////////////////////////////////////////
-
 #include <wx/wx.h>
 #include <wx/glcanvas.h>
 

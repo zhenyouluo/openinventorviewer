@@ -1,3 +1,14 @@
+/*
+_______________________________________________________________________
+__________________________ G E O M E T R Y ____________________________
+|
+| THIS FILE IS PART OF THE INVENTOR VIEWER LIBRARY.
+| USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     
+| GOVERNED BY A BSD-STYLE SOURCE LICENSE.
+| PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       
+_______________________________________________________________________
+_______________________________________________________________________
+*/
 #include "SoWxViewer.h"
 
 #include <wx/bitmap.h>
