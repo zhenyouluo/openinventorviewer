@@ -8,7 +8,7 @@
 #include <Inventor/nodes/SoCube.h>
 #include <Inventor/manips/SoTrackballManip.h>
 
-#include "SoQtViewer.h"
+#include <SoViewer/Qt/SoQtViewer.h>
 
 int main(int argc, char **argv)
 {
@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 
   SoQtViewer * myViewer = new SoQtViewer;
 
-#if (QT_VERSION < 0x40000 )
+#if QT_VERSION < 0x040000
   app.setMainWidget( myViewer );
 #endif
 
