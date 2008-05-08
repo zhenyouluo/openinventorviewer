@@ -25,15 +25,15 @@ class SoDirectionalLight;
 class SoWxViewer : public SoWxRenderArea
 {
 public:
-	SoWxViewer(wxWindow *parent, wxWindowID id = wxID_ANY,
-			   const wxPoint& pos = wxDefaultPosition,
-			   const wxSize& size = wxDefaultSize, long style = 0,
-			   const wxString& name = wxT("SoWxRenderArea"));
+    SoWxViewer(wxWindow *parent, wxWindowID id = wxID_ANY,
+        const wxPoint& pos = wxDefaultPosition,
+        const wxSize& size = wxDefaultSize, long style = 0,
+        const wxString& name = wxT("SoWxRenderArea"));
 
     virtual ~SoWxViewer();
 
     /*! Sets the edited camera. Setting the camera is only needed if the first camera found
-        in the scene when setting the scene graph isn't the one the user really wants to edit. */
+    in the scene when setting the scene graph isn't the one the user really wants to edit. */
     virtual void setCamera(SoCamera *camera);
 
     //! Gets the edited camera. 
@@ -41,37 +41,37 @@ public:
 
     //! Sets the scene graph to be rendered in this component's window. 
     virtual void setSceneGraph(SoNode * a_new_scene);
-    
+
     /*! Sets the camera type that will be created by the viewer if no cameras are found in 
-        the scene graph (see SoPerspectiveCamera and SoOrthographicCamera). 
-        By default an SoPerspectiveCamera will be created if no cameras are found. */
+    the scene graph (see SoPerspectiveCamera and SoOrthographicCamera). 
+    By default an SoPerspectiveCamera will be created if no cameras are found. */
     virtual void setCameraType(SoType type);
-    
+
     //! Gets the scene graph to be rendered in this component's window.
     virtual SoNode * getSceneGraph();
-    
+
     //! Changes the camera position to view the entire scene (the camera zoom or orientation isn't changed).
     virtual void viewAll();
 
-	/*! Set view mode.
-		If the view mode is on, user events will be caught and used to influence the camera position / orientation. 
-		If view mode is off, all events in the viewer canvas (like for instance keypresses or mouseclicks and -movements) will be passed along to the scene graph.
-		Default is to have the view mode active. */
-	virtual void setViewing(bool state);
+    /*! Set view mode.
+    If the view mode is on, user events will be caught and used to influence the camera position / orientation. 
+    If view mode is off, all events in the viewer canvas (like for instance keypresses or mouseclicks and -movements) will be passed along to the scene graph.
+    Default is to have the view mode active. */
+    virtual void setViewing(bool state);
 
-	/*! Return state of view mode.
-		true means that the mode of the viewer is set such that user interaction with the mouse is used to modify the position and orientation of the camera. */
-	bool isViewing() const{ return m_viewing; }
+    /*! Return state of view mode.
+    true means that the mode of the viewer is set such that user interaction with the mouse is used to modify the position and orientation of the camera. */
+    bool isViewing() const{ return m_viewing; }
 
     SbVec3f projectPoint(const SbVec2f & pt) const;
     void rotateCamera(const SbRotation &rot);
     void adjustCameraClippingPlanes();
 protected:
     virtual void soPaintEvent();
-	virtual void soKeyPressEvent( SoKeyboardEvent * e);
+    virtual void soKeyPressEvent( SoKeyboardEvent * e);
     virtual void soMousePressEvent( SoMouseButtonEvent * e );
     virtual void soMouseMoveEvent( SoLocation2Event * e );
-	virtual void soMouseReleaseEvent( SoMouseButtonEvent * e );
+    virtual void soMouseReleaseEvent( SoMouseButtonEvent * e );
     virtual void soWheelEvent( SoWheelEvent * e );
 private:
     SoType               m_cameraType;
@@ -81,9 +81,9 @@ private:
     SoDirectionalLight * m_p_directionalLight;
 
     SbVec2f              m_startDrag;
-	bool				 m_viewing;
+    bool				 m_viewing;
 
-	SoMouseButtonEvent::Button m_mouseButton;
+    SoMouseButtonEvent::Button m_mouseButton;
 };
 
 #endif

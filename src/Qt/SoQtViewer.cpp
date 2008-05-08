@@ -19,7 +19,7 @@ _______________________________________________________________________
 
 #include <Inventor/projectors/SbSphereSheetProjector.h>
 
-#if (QT_VERSION < 0x40000 )
+#if QT_VERSION < 0x040000
 #   include <qbitmap.h>
 #   include <qcursor.h> 
 #endif
@@ -30,7 +30,7 @@ m_p_sceneGraph(0),
 m_p_camera(0),
 m_viewing(true)
 {
-	m_mouseButton = SoMouseButtonEvent::ANY;
+    m_mouseButton = SoMouseButtonEvent::ANY;
     m_p_rootGraph = new SoSeparator;
     m_p_rootGraph->ref();
 
@@ -39,7 +39,7 @@ m_viewing(true)
 
     m_cameraType = SoPerspectiveCamera::getClassTypeId();
 
-	setViewing(true);
+    setViewing(true);
 
     SoQtRenderArea::setSceneGraph(m_p_rootGraph);
 }
@@ -62,7 +62,7 @@ void SoQtViewer::setCamera(SoCamera *camera)
 void SoQtViewer::setCameraType(SoType mType)
 {
     if(mType.isDerivedFrom(SoPerspectiveCamera::getClassTypeId()) ||
-       mType.isDerivedFrom(SoOrthographicCamera::getClassTypeId()))
+        mType.isDerivedFrom(SoOrthographicCamera::getClassTypeId()))
     {
         m_cameraType = mType;
     }
@@ -113,44 +113,44 @@ void SoQtViewer::viewAll()
 
 void SoQtViewer::setViewing(bool state)
 {
-	m_viewing = state;
+    m_viewing = state;
 
-#if (QT_VERSION >= 0x40000 )
-  if(m_viewing) setCursor((m_mouseButton == SoMouseButtonEvent::ANY) ? Qt::OpenHandCursor : Qt::ClosedHandCursor);
-  else setCursor(Qt::ArrowCursor);
+#if QT_VERSION >= 0x040000
+    if(m_viewing) setCursor((m_mouseButton == SoMouseButtonEvent::ANY) ? Qt::OpenHandCursor : Qt::ClosedHandCursor);
+    else setCursor(Qt::ArrowCursor);
 #else
-  static const unsigned char openhand_bits[] = 
-  {
-    0x80,0x01,0x58,0x0e,0x64,0x12,0x64,0x52,0x48,0xb2,0x48,0x92,
-    0x16,0x90,0x19,0x80,0x11,0x40,0x02,0x40,0x04,0x40,0x04,0x20,
-    0x08,0x20,0x10,0x10,0x20,0x10,0x00,0x00
-  };
-  // WARNING ! Masks are inverted compared to WxWidget
-  static const unsigned char openhandm_bits[] = 
-  {
-    0x80,0x01,0xd8,0x0f,0xfc,0x1f,0xfc,0x5f,0xf8,0xff,0xf8,0xff,
-    0xfe,0xff,0xff,0xff,0xff,0x7f,0xfe,0x7f,0xfc,0x7f,0xfc,0x3f,
-    0xf8,0x3f,0xf0,0x1f,0xe0,0x1f,0x00,0x0
-  };
-  static const unsigned char closedhand_bits[] = 
-  {
-    0x00,0x00,0x00,0x00,0x00,0x00,0xb0,0x0d,0x48,0x32,0x08,0x50,
-    0x10,0x40,0x18,0x40,0x04,0x40,0x04,0x20,0x08,0x20,0x10,0x10,
-    0x20,0x10,0x20,0x10,0x00,0x00,0x00,0x00
-  };
-  
-  static const unsigned char closedhandm_bits[] = 
-  {
-    0x00,0x00,0x00,0x00,0x00,0x00,0xb0,0x0d,0xf8,0x3f,0xf8,0x7f,
-    0xf0,0x7f,0xf8,0x7f,0xfc,0x7f,0xfc,0x3f,0xf8,0x3f,0xf0,0x1f,
-    0xe0,0x1f,0xe0,0x1f,0x00,0x00,0x00,0x00
-  };
+    static const unsigned char openhand_bits[] = 
+    {
+        0x80,0x01,0x58,0x0e,0x64,0x12,0x64,0x52,0x48,0xb2,0x48,0x92,
+        0x16,0x90,0x19,0x80,0x11,0x40,0x02,0x40,0x04,0x40,0x04,0x20,
+        0x08,0x20,0x10,0x10,0x20,0x10,0x00,0x00
+    };
+    // WARNING ! Masks are inverted compared to WxWidget
+    static const unsigned char openhandm_bits[] = 
+    {
+        0x80,0x01,0xd8,0x0f,0xfc,0x1f,0xfc,0x5f,0xf8,0xff,0xf8,0xff,
+        0xfe,0xff,0xff,0xff,0xff,0x7f,0xfe,0x7f,0xfc,0x7f,0xfc,0x3f,
+        0xf8,0x3f,0xf0,0x1f,0xe0,0x1f,0x00,0x0
+    };
+    static const unsigned char closedhand_bits[] = 
+    {
+        0x00,0x00,0x00,0x00,0x00,0x00,0xb0,0x0d,0x48,0x32,0x08,0x50,
+        0x10,0x40,0x18,0x40,0x04,0x40,0x04,0x20,0x08,0x20,0x10,0x10,
+        0x20,0x10,0x20,0x10,0x00,0x00,0x00,0x00
+    };
 
-  static QCursor OpenHandCursor = QCursor(QBitmap(16, 16, openhand_bits, true), QBitmap(16, 16, openhandm_bits, true));
-  static QCursor ClosedHandCursor = QCursor(QBitmap(16, 16, closedhand_bits, true), QBitmap(16, 16, closedhandm_bits, true));
+    static const unsigned char closedhandm_bits[] = 
+    {
+        0x00,0x00,0x00,0x00,0x00,0x00,0xb0,0x0d,0xf8,0x3f,0xf8,0x7f,
+        0xf0,0x7f,0xf8,0x7f,0xfc,0x7f,0xfc,0x3f,0xf8,0x3f,0xf0,0x1f,
+        0xe0,0x1f,0xe0,0x1f,0x00,0x00,0x00,0x00
+    };
 
-  if(m_viewing) setCursor((m_mouseButton == SoMouseButtonEvent::ANY) ? OpenHandCursor : ClosedHandCursor);
-  else setCursor(Qt::ArrowCursor);
+    static QCursor OpenHandCursor = QCursor(QBitmap(16, 16, openhand_bits, true), QBitmap(16, 16, openhandm_bits, true));
+    static QCursor ClosedHandCursor = QCursor(QBitmap(16, 16, closedhand_bits, true), QBitmap(16, 16, closedhandm_bits, true));
+
+    if(m_viewing) setCursor((m_mouseButton == SoMouseButtonEvent::ANY) ? OpenHandCursor : ClosedHandCursor);
+    else setCursor(Qt::ArrowCursor);
 #endif
 }
 
@@ -208,28 +208,28 @@ void SoQtViewer::soPaintEvent()
 
 void SoQtViewer::soKeyPressEvent( SoKeyboardEvent * e)
 {
-	if(e->getKey() == SoKeyboardEvent::ESCAPE) setViewing(!m_viewing);
+    if(e->getKey() == SoKeyboardEvent::ESCAPE) setViewing(!m_viewing);
 
-	SoQtRenderArea::soKeyPressEvent( e );
+    SoQtRenderArea::soKeyPressEvent( e );
 }
 
 void SoQtViewer::soMousePressEvent( SoMouseButtonEvent * e )
 {
     if(!m_viewing) SoQtRenderArea::soMousePressEvent(e);
 
-	m_mouseButton = e->getButton();
-	m_startDrag = e->getNormalizedPosition(getViewportRegion());
+    m_mouseButton = e->getButton();
+    m_startDrag = e->getNormalizedPosition(getViewportRegion());
 
-	setViewing(m_viewing);
+    setViewing(m_viewing);
 }
 
 void SoQtViewer::soMouseReleaseEvent( SoMouseButtonEvent * e )
 {
-	if(!m_viewing) SoQtRenderArea::soMouseReleaseEvent(e);
+    if(!m_viewing) SoQtRenderArea::soMouseReleaseEvent(e);
 
-	m_mouseButton = SoMouseButtonEvent::ANY;
+    m_mouseButton = SoMouseButtonEvent::ANY;
 
-	setViewing(m_viewing);
+    setViewing(m_viewing);
 }
 
 void SoQtViewer::soMouseMoveEvent( SoLocation2Event * e )
@@ -239,37 +239,37 @@ void SoQtViewer::soMouseMoveEvent( SoLocation2Event * e )
     if (!m_p_camera || !m_viewing) return;
 
     //SbVec2f endDrag(e->x()/(float)width(), (height() - e->y())/(float)height());
-	SbVec2f endDrag = e->getNormalizedPosition(getViewportRegion());
+    SbVec2f endDrag = e->getNormalizedPosition(getViewportRegion());
 
-	if(m_mouseButton == SoMouseButtonEvent::BUTTON1){
-		// Init the sphere projector class
-		SbViewVolume vv;
-		vv.ortho(-1, 1, -1, 1, -10, 10);
-		SbSphereSheetProjector sphereSheet;
-		sphereSheet.setViewVolume( vv );
-		sphereSheet.setSphere( SbSphere( SbVec3f(0, 0, 0), .7f) );
+    if(m_mouseButton == SoMouseButtonEvent::BUTTON1){
+        // Init the sphere projector class
+        SbViewVolume vv;
+        vv.ortho(-1, 1, -1, 1, -10, 10);
+        SbSphereSheetProjector sphereSheet;
+        sphereSheet.setViewVolume( vv );
+        sphereSheet.setSphere( SbSphere( SbVec3f(0, 0, 0), .7f) );
 
-		// Set the sphere sheet starting point
-		SbVec3f lstart = sphereSheet.project(m_startDrag);
-		SbVec3f lend = sphereSheet.project(endDrag);
+        // Set the sphere sheet starting point
+        SbVec3f lstart = sphereSheet.project(m_startDrag);
+        SbVec3f lend = sphereSheet.project(endDrag);
 
-		rotateCamera( sphereSheet.getRotation(lstart, lend).inverse() );
-	}
+        rotateCamera( sphereSheet.getRotation(lstart, lend).inverse() );
+    }
 
-	if(m_mouseButton == SoMouseButtonEvent::BUTTON2){
-		SbVec3f lstart = projectPoint(m_startDrag);
-		SbVec3f lend = projectPoint(endDrag);
+    if(m_mouseButton == SoMouseButtonEvent::BUTTON2){
+        SbVec3f lstart = projectPoint(m_startDrag);
+        SbVec3f lend = projectPoint(endDrag);
 
-		// move the camera by the delta 3D position amount
-		m_p_camera->position = m_p_camera->position.getValue() +  (lstart - lend);
-	}
+        // move the camera by the delta 3D position amount
+        m_p_camera->position = m_p_camera->position.getValue() +  (lstart - lend);
+    }
 
     m_startDrag = endDrag;
 }
 
 void SoQtViewer::soWheelEvent( SoWheelEvent * e )
 {
-	if (!m_p_camera || !m_viewing) return;
+    if (!m_p_camera || !m_viewing) return;
 
     float dol = pow(2.0f,e->getDelta() / 4000.0f);
 
@@ -304,7 +304,7 @@ void SoQtViewer::adjustCameraClippingPlanes()
 
     SbVec3f forward;
     m_p_camera->orientation.getValue().multVec(SbVec3f(0,0,-1), forward);
-    
+
     float denumerator = forward.length();
     float numerator = (bSphere.getCenter() - m_p_camera->position.getValue()).dot(forward);
     float distToCenter = (forward * (numerator / denumerator)).length();

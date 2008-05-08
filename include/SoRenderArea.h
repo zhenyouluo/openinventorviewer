@@ -23,64 +23,64 @@ class SoTempPath;
 //The SoWheelEvent class contains parameters that describe a mouse wheel event.
 class SoWheelEvent : public SoEvent
 {
-	SO_EVENT_HEADER();
+    SO_EVENT_HEADER();
 public:
-	SoWheelEvent(){}
+    SoWheelEvent(){}
 
-	void setDelta(int delta){ m_delta = delta; }
-	int getDelta() const{ return m_delta; }
+    void setDelta(int delta){ m_delta = delta; }
+    int getDelta() const{ return m_delta; }
 private:
-	int m_delta;
+    int m_delta;
 };
 
 class SoRenderArea
 {
 public:
-	SoRenderArea();
-	virtual ~SoRenderArea();
+    SoRenderArea();
+    virtual ~SoRenderArea();
 
-	//! Sets the quality level for rendering transparent objects. See SoGLRenderAction for possible transparency types.
-	void setTransparencyType(SoGLRenderAction::TransparencyType a_type);
+    //! Sets the quality level for rendering transparent objects. See SoGLRenderAction for possible transparency types.
+    void setTransparencyType(SoGLRenderAction::TransparencyType a_type);
 
-	//! Sets the scene graph to be rendered in this component's window. 
-	virtual void setSceneGraph(SoNode * a_new_scene);
+    //! Sets the scene graph to be rendered in this component's window. 
+    virtual void setSceneGraph(SoNode * a_new_scene);
 
-	//! Gets the scene graph to be rendered in this component's window.
-	virtual SoNode * getSceneGraph(){ return m_p_scene_manager->getSceneGraph();}
+    //! Gets the scene graph to be rendered in this component's window.
+    virtual SoNode * getSceneGraph(){ return m_p_scene_manager->getSceneGraph();}
 
-	//! Sets the background color for this window. Default is black (0,0,0). 
-	virtual void setBackgroundColor(const SbColor & a_color){ m_p_scene_manager->setBackgroundColor(a_color); }
+    //! Sets the background color for this window. Default is black (0,0,0). 
+    virtual void setBackgroundColor(const SbColor & a_color){ m_p_scene_manager->setBackgroundColor(a_color); }
 
-	//! Gets the background color for this window. 
-	const SbColor & getBackgroundColor() const { return m_p_scene_manager->getBackgroundColor(); }
+    //! Gets the background color for this window. 
+    const SbColor & getBackgroundColor() const { return m_p_scene_manager->getBackgroundColor(); }
 
-	//! Gets the normal scene manager.
-	SoSceneManager * getSceneManager(){ return m_p_scene_manager; }
+    //! Gets the normal scene manager.
+    SoSceneManager * getSceneManager(){ return m_p_scene_manager; }
 
-	//! Sets viewport region to use for rendering. 
-	void setViewportRegion(const SbViewportRegion & a_region) { m_p_scene_manager->getGLRenderAction()->setViewportRegion(a_region); }
+    //! Sets viewport region to use for rendering. 
+    void setViewportRegion(const SbViewportRegion & a_region) { m_p_scene_manager->getGLRenderAction()->setViewportRegion(a_region); }
 
-	//! Gets current viewport region to use for rendering. 
-	const SbViewportRegion & getViewportRegion() const { return m_p_scene_manager->getGLRenderAction()->getViewportRegion(); }
+    //! Gets current viewport region to use for rendering. 
+    const SbViewportRegion & getViewportRegion() const { return m_p_scene_manager->getGLRenderAction()->getViewportRegion(); }
 
 protected:
-	virtual void soKeyPressEvent( SoKeyboardEvent * e);
-	virtual void soKeyReleaseEvent( SoKeyboardEvent * e );
-	virtual void soMouseMoveEvent( SoLocation2Event * e );
-	virtual void soMousePressEvent( SoMouseButtonEvent * e );
-	virtual void soMouseReleaseEvent( SoMouseButtonEvent * e );
-	virtual void soWheelEvent( SoWheelEvent * e );
-	virtual void soRenderCallback() = 0; 
-	virtual void soResizeEvent(int width, int height);
-	virtual void soPaintEvent();
+    virtual void soKeyPressEvent( SoKeyboardEvent * e);
+    virtual void soKeyReleaseEvent( SoKeyboardEvent * e );
+    virtual void soMouseMoveEvent( SoLocation2Event * e );
+    virtual void soMousePressEvent( SoMouseButtonEvent * e );
+    virtual void soMouseReleaseEvent( SoMouseButtonEvent * e );
+    virtual void soWheelEvent( SoWheelEvent * e );
+    virtual void soRenderCallback() = 0; 
+    virtual void soResizeEvent(int width, int height);
+    virtual void soPaintEvent();
 
-	SoSceneManager     * m_p_scene_manager;
-	SoKeyboardEvent    * m_keyboard_event;
-	SoMouseButtonEvent * m_mouse_button_event;
-	SoLocation2Event   * m_location_event;
-	SoWheelEvent	   * m_wheel_event;
+    SoSceneManager     * m_p_scene_manager;
+    SoKeyboardEvent    * m_keyboard_event;
+    SoMouseButtonEvent * m_mouse_button_event;
+    SoLocation2Event   * m_location_event;
+    SoWheelEvent	   * m_wheel_event;
 
-	static void renderCallback(void *userData, SoSceneManager *mgr);
+    static void renderCallback(void *userData, SoSceneManager *mgr);
 };
 
 #endif // _SORENDERAREA_H_

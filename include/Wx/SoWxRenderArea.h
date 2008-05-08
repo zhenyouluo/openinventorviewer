@@ -20,32 +20,32 @@ _______________________________________________________________________
 class SoWxRenderArea : public wxGLCanvas, public SoRenderArea
 {
 public:
-	SoWxRenderArea(wxWindow *parent, wxWindowID id = wxID_ANY,
-				   const wxPoint& pos = wxDefaultPosition,
-				   const wxSize& size = wxDefaultSize, long style = 0,
-				   const wxString& name = wxT("SoWxRenderArea"));
-	virtual ~SoWxRenderArea();
-	
+    SoWxRenderArea(wxWindow *parent, wxWindowID id = wxID_ANY,
+        const wxPoint& pos = wxDefaultPosition,
+        const wxSize& size = wxDefaultSize, long style = 0,
+        const wxString& name = wxT("SoWxRenderArea"));
+    virtual ~SoWxRenderArea();
+
 protected:
-	virtual void soRenderCallback();
+    virtual void soRenderCallback();
 
-	void initializeGL();
-	void OnTimerEvent(wxTimerEvent& event);
-	void OnKeyDown(wxKeyEvent& event);
-	void OnKeyUp(wxKeyEvent& event); 
-	void OnMousePress(wxMouseEvent& event);
-	void OnMouseMove(wxMouseEvent& event);
-	void OnMouseRelease(wxMouseEvent& event);
-	void OnMouseWheel(wxMouseEvent& event);
-	void OnPaint(wxPaintEvent& event);
-	void OnSize(wxSizeEvent& event);
-	void OnEraseBackground(wxEraseEvent& event);
+    void initializeGL();
+    void OnTimerEvent(wxTimerEvent& event);
+    void OnKeyDown(wxKeyEvent& event);
+    void OnKeyUp(wxKeyEvent& event); 
+    void OnMousePress(wxMouseEvent& event);
+    void OnMouseMove(wxMouseEvent& event);
+    void OnMouseRelease(wxMouseEvent& event);
+    void OnMouseWheel(wxMouseEvent& event);
+    void OnPaint(wxPaintEvent& event);
+    void OnSize(wxSizeEvent& event);
+    void OnEraseBackground(wxEraseEvent& event);
 private:
-	wxTimer				 m_time;
-	
-	SoKeyboardEvent::Key translateKey( wxKeyEvent& event );
+    wxTimer				 m_time;
 
-	DECLARE_EVENT_TABLE()
+    SoKeyboardEvent::Key translateKey( wxKeyEvent& event );
+
+    DECLARE_EVENT_TABLE()
 };
 
 #endif // _SOWXRENDERAREA_H_

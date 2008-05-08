@@ -23,13 +23,13 @@ _______________________________________________________________________
 #include <Inventor/projectors/SbSphereSheetProjector.h>
 
 SoWxViewer::SoWxViewer(wxWindow *parent, wxWindowID id,
-					   const wxPoint& pos, const wxSize& size, long style, const wxString& name)
-: SoWxRenderArea(parent, id, pos, size, style, name),
-m_p_sceneGraph(0),
-m_p_camera(0),
-m_viewing(true)
+                       const wxPoint& pos, const wxSize& size, long style, const wxString& name)
+                       : SoWxRenderArea(parent, id, pos, size, style, name),
+                       m_p_sceneGraph(0),
+                       m_p_camera(0),
+                       m_viewing(true)
 {
-	m_mouseButton = SoMouseButtonEvent::ANY;
+    m_mouseButton = SoMouseButtonEvent::ANY;
     m_p_rootGraph = new SoSeparator;
     m_p_rootGraph->ref();
 
@@ -38,7 +38,7 @@ m_viewing(true)
 
     m_cameraType = SoPerspectiveCamera::getClassTypeId();
 
-	setViewing(true);
+    setViewing(true);
 
     SoWxRenderArea::setSceneGraph(m_p_rootGraph);
 }
@@ -61,7 +61,7 @@ void SoWxViewer::setCamera(SoCamera *camera)
 void SoWxViewer::setCameraType(SoType mType)
 {
     if(mType.isDerivedFrom(SoPerspectiveCamera::getClassTypeId()) ||
-       mType.isDerivedFrom(SoOrthographicCamera::getClassTypeId()))
+        mType.isDerivedFrom(SoOrthographicCamera::getClassTypeId()))
     {
         m_cameraType = mType;
     }
@@ -112,50 +112,50 @@ void SoWxViewer::viewAll()
 
 void SoWxViewer::setViewing(bool state)
 {
-	m_viewing = state;
+    m_viewing = state;
 
-	static const unsigned char openhand_bits[] = 
-	{
-		0x80,0x01,0x58,0x0e,0x64,0x12,0x64,0x52,0x48,0xb2,0x48,0x92,
-		0x16,0x90,0x19,0x80,0x11,0x40,0x02,0x40,0x04,0x40,0x04,0x20,
-		0x08,0x20,0x10,0x10,0x20,0x10,0x00,0x00
-	};
-	static const unsigned char openhandm_bits[] = 
-	{
-		0x7f,0xfe,0x27,0xf0,0x03,0xe0,0x03,0xa0,0x07,0x00,0x07,0x00,
-		0x01,0x00,0x00,0x00,0x00,0x80,0x01,0x80,0x03,0x80,0x03,0xc0,
-		0x07,0xc0,0x0f,0xe0,0x1f,0xe0,0xff,0xff
-	};
-	static const unsigned char closedhand_bits[] = 
-	{
-		0x00,0x00,0x00,0x00,0x00,0x00,0xb0,0x0d,0x48,0x32,0x08,0x50,
-		0x10,0x40,0x18,0x40,0x04,0x40,0x04,0x20,0x08,0x20,0x10,0x10,
-		0x20,0x10,0x20,0x10,0x00,0x00,0x00,0x00
-	};
-	static const unsigned char closedhandm_bits[] = 
-	{
-		0xff,0xff,0xff,0xff,0xff,0xff,0x4f,0xf2,0x07,0xc0,0x07,0x80,
-		0x0f,0x80,0x07,0x80,0x03,0x80,0x03,0xc0,0x07,0xc0,0x0f,0xe0,
-		0x1f,0xe0,0x1f,0xe0,0xff,0xff,0xff,0xff
-	};
+    static const unsigned char openhand_bits[] = 
+    {
+        0x80,0x01,0x58,0x0e,0x64,0x12,0x64,0x52,0x48,0xb2,0x48,0x92,
+        0x16,0x90,0x19,0x80,0x11,0x40,0x02,0x40,0x04,0x40,0x04,0x20,
+        0x08,0x20,0x10,0x10,0x20,0x10,0x00,0x00
+    };
+    static const unsigned char openhandm_bits[] = 
+    {
+        0x7f,0xfe,0x27,0xf0,0x03,0xe0,0x03,0xa0,0x07,0x00,0x07,0x00,
+        0x01,0x00,0x00,0x00,0x00,0x80,0x01,0x80,0x03,0x80,0x03,0xc0,
+        0x07,0xc0,0x0f,0xe0,0x1f,0xe0,0xff,0xff
+    };
+    static const unsigned char closedhand_bits[] = 
+    {
+        0x00,0x00,0x00,0x00,0x00,0x00,0xb0,0x0d,0x48,0x32,0x08,0x50,
+        0x10,0x40,0x18,0x40,0x04,0x40,0x04,0x20,0x08,0x20,0x10,0x10,
+        0x20,0x10,0x20,0x10,0x00,0x00,0x00,0x00
+    };
+    static const unsigned char closedhandm_bits[] = 
+    {
+        0xff,0xff,0xff,0xff,0xff,0xff,0x4f,0xf2,0x07,0xc0,0x07,0x80,
+        0x0f,0x80,0x07,0x80,0x03,0x80,0x03,0xc0,0x07,0xc0,0x0f,0xe0,
+        0x1f,0xe0,0x1f,0xe0,0xff,0xff,0xff,0xff
+    };
 
-	if(m_viewing){
-		const unsigned char * cursor_bits = (m_mouseButton == SoMouseButtonEvent::ANY) ? openhand_bits : closedhand_bits;
-		const unsigned char * mask_bits = (m_mouseButton == SoMouseButtonEvent::ANY) ? openhandm_bits : closedhandm_bits;
-		
-		wxBitmap cbitmap((char*)cursor_bits,16,16);
-		wxBitmap mbitmap((char*)mask_bits,16,16);
-		cbitmap.SetMask(new wxMask(mbitmap));
+    if(m_viewing){
+        const unsigned char * cursor_bits = (m_mouseButton == SoMouseButtonEvent::ANY) ? openhand_bits : closedhand_bits;
+        const unsigned char * mask_bits = (m_mouseButton == SoMouseButtonEvent::ANY) ? openhandm_bits : closedhandm_bits;
 
-		SetCursor(cbitmap.ConvertToImage());
-	}else SetCursor(wxCURSOR_ARROW);
+        wxBitmap cbitmap((char*)cursor_bits,16,16);
+        wxBitmap mbitmap((char*)mask_bits,16,16);
+        cbitmap.SetMask(new wxMask(mbitmap));
+
+        SetCursor(cbitmap.ConvertToImage());
+    }else SetCursor(wxCURSOR_ARROW);
 }
 
 SbVec3f SoWxViewer::projectPoint(const SbVec2f & pt) const
 {
     if(!m_p_camera) return SbVec3f(0.0f, 0.0f, 0.0f);
 
-	wxSize wxsize = wxGLCanvas::GetClientSize();
+    wxSize wxsize = wxGLCanvas::GetClientSize();
 
     // Avoid problems when width < height.
     SbViewVolume cameraVolume;
@@ -207,28 +207,28 @@ void SoWxViewer::soPaintEvent()
 
 void SoWxViewer::soKeyPressEvent( SoKeyboardEvent * e)
 {
-	if(e->getKey() == SoKeyboardEvent::ESCAPE) setViewing(!m_viewing);
+    if(e->getKey() == SoKeyboardEvent::ESCAPE) setViewing(!m_viewing);
 
-	SoWxRenderArea::soKeyPressEvent( e );
+    SoWxRenderArea::soKeyPressEvent( e );
 }
 
 void SoWxViewer::soMousePressEvent( SoMouseButtonEvent * e )
 {
     if(!m_viewing) SoWxRenderArea::soMousePressEvent(e);
 
-	m_mouseButton = e->getButton();
-	m_startDrag = e->getNormalizedPosition(getViewportRegion());
+    m_mouseButton = e->getButton();
+    m_startDrag = e->getNormalizedPosition(getViewportRegion());
 
-	setViewing(m_viewing);
+    setViewing(m_viewing);
 }
 
 void SoWxViewer::soMouseReleaseEvent( SoMouseButtonEvent * e )
 {
-	if(!m_viewing) SoWxRenderArea::soMouseReleaseEvent(e);
+    if(!m_viewing) SoWxRenderArea::soMouseReleaseEvent(e);
 
-	m_mouseButton = SoMouseButtonEvent::ANY;
+    m_mouseButton = SoMouseButtonEvent::ANY;
 
-	setViewing(m_viewing);
+    setViewing(m_viewing);
 }
 
 void SoWxViewer::soMouseMoveEvent( SoLocation2Event * e )
@@ -238,37 +238,37 @@ void SoWxViewer::soMouseMoveEvent( SoLocation2Event * e )
     if (!m_p_camera || !m_viewing) return;
 
     //SbVec2f endDrag(e->x()/(float)width(), (height() - e->y())/(float)height());
-	SbVec2f endDrag = e->getNormalizedPosition(getViewportRegion());
+    SbVec2f endDrag = e->getNormalizedPosition(getViewportRegion());
 
-	if(m_mouseButton == SoMouseButtonEvent::BUTTON1){
-		// Init the sphere projector class
-		SbViewVolume vv;
-		vv.ortho(-1, 1, -1, 1, -10, 10);
-		SbSphereSheetProjector sphereSheet;
-		sphereSheet.setViewVolume( vv );
-		sphereSheet.setSphere( SbSphere( SbVec3f(0, 0, 0), .7f) );
+    if(m_mouseButton == SoMouseButtonEvent::BUTTON1){
+        // Init the sphere projector class
+        SbViewVolume vv;
+        vv.ortho(-1, 1, -1, 1, -10, 10);
+        SbSphereSheetProjector sphereSheet;
+        sphereSheet.setViewVolume( vv );
+        sphereSheet.setSphere( SbSphere( SbVec3f(0, 0, 0), .7f) );
 
-		// Set the sphere sheet starting point
-		SbVec3f lstart = sphereSheet.project(m_startDrag);
-		SbVec3f lend = sphereSheet.project(endDrag);
+        // Set the sphere sheet starting point
+        SbVec3f lstart = sphereSheet.project(m_startDrag);
+        SbVec3f lend = sphereSheet.project(endDrag);
 
-		rotateCamera( sphereSheet.getRotation(lstart, lend).inverse() );
-	}
+        rotateCamera( sphereSheet.getRotation(lstart, lend).inverse() );
+    }
 
-	if(m_mouseButton == SoMouseButtonEvent::BUTTON2){
-		SbVec3f lstart = projectPoint(m_startDrag);
-		SbVec3f lend = projectPoint(endDrag);
+    if(m_mouseButton == SoMouseButtonEvent::BUTTON2){
+        SbVec3f lstart = projectPoint(m_startDrag);
+        SbVec3f lend = projectPoint(endDrag);
 
-		// move the camera by the delta 3D position amount
-		m_p_camera->position = m_p_camera->position.getValue() +  (lstart - lend);
-	}
+        // move the camera by the delta 3D position amount
+        m_p_camera->position = m_p_camera->position.getValue() +  (lstart - lend);
+    }
 
     m_startDrag = endDrag;
 }
 
 void SoWxViewer::soWheelEvent( SoWheelEvent * e )
 {
-	if (!m_p_camera || !m_viewing) return;
+    if (!m_p_camera || !m_viewing) return;
 
     float dol = pow(2.0f,e->getDelta() / 4000.0f);
 
@@ -303,7 +303,7 @@ void SoWxViewer::adjustCameraClippingPlanes()
 
     SbVec3f forward;
     m_p_camera->orientation.getValue().multVec(SbVec3f(0,0,-1), forward);
-    
+
     float denumerator = forward.length();
     float numerator = (bSphere.getCenter() - m_p_camera->position.getValue()).dot(forward);
     float distToCenter = (forward * (numerator / denumerator)).length();
