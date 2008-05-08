@@ -10,7 +10,8 @@ _______________________________________________________________________
 _______________________________________________________________________
 */
 
-#include "SoQtRenderArea.h"
+#include <SoViewer/Qt/SoQtRenderArea.h>
+#include <Inventor/SoDB.h>
 
 #if QT_VERSION >= 0x040000
 #   include <QMouseEvent>

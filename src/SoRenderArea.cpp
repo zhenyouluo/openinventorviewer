@@ -9,13 +9,13 @@ __________________________ G E O M E T R Y ____________________________
 _______________________________________________________________________
 _______________________________________________________________________
 */
-#include <SoRenderArea.h>
+#include <SoViewer/SoRenderArea.h>
 
 #include <Inventor/SoDB.h>
 #include <Inventor/nodekits/SoNodeKit.h> 
 #include <Inventor/SoInteraction.h>
 
-SO_EVENT_SOURCE(SoWheelEvent)
+SO_EVENT_SOURCE(SoWheelEvent);
 
 void SoRenderArea::renderCallback(void *userData, SoSceneManager *)
 {

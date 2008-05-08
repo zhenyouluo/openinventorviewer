@@ -9,7 +9,7 @@ __________________________ G E O M E T R Y ____________________________
 _______________________________________________________________________
 _______________________________________________________________________
 */
-#include "SoQtViewer.h"
+#include <SoViewer/Qt/SoQtViewer.h>
 
 #include <Inventor/nodes/SoPerspectiveCamera.h>
 #include <Inventor/nodes/SoOrthographicCamera.h>
