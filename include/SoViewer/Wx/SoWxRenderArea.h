@@ -15,7 +15,7 @@ _______________________________________________________________________
 #include <wx/glcanvas.h>
 #include <wx/timer.h>
 
-#include <SoRenderArea.h>
+#include <SoViewer/SoRenderArea.h>
 
 class SOVIEWER_API SoWxRenderArea : public wxGLCanvas, public SoRenderArea
 {

@@ -12,9 +12,10 @@
 #include <wx/wx.h>
 #include <wx/glcanvas.h>
 
-#include "SoWxViewer.h"
+#include <SoViewer/Wx/SoWxViewer.h>
 
 #include <Inventor/nodes/SoCube.h>
+#include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/manips/SoTrackballManip.h>
 
 // Define a new application type
@@ -24,7 +25,7 @@ public:
 	bool OnInit()
 	{
 		// Create the main frame window
-		wxFrame *frame = new wxFrame(NULL, wxID_ANY, "wxWidgets OpenInventor Sample", wxDefaultPosition, wxSize(400, 300));
+		wxFrame *frame = new wxFrame(NULL, wxID_ANY, _T("wxWidgets OpenInventor Sample"), wxDefaultPosition, wxSize(400, 300));
 
 		SoWxViewer * myViewer = new SoWxViewer(frame, wxID_ANY);
 		

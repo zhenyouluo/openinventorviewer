@@ -9,7 +9,7 @@ __________________________ G E O M E T R Y ____________________________
 _______________________________________________________________________
 _______________________________________________________________________
 */
-#include "SoWxRenderArea.h"
+#include <SoViewer/Wx/SoWxRenderArea.h>
 
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
