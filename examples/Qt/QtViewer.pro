@@ -1,12 +1,22 @@
 TEMPLATE = app
 TARGET = 
 QT     += opengl
-CONFIG += debug
+
 DEPENDPATH += .
 INCLUDEPATH += . ../../include
 DEFINES += COIN_DLL
 
-LIBS += $(COINDIR)\lib\coin2d.lib ../../bin/SoQtViewer.lib
+CONFIG(debug, debug|release){
+  TARGET = QtViewerd
+  LIBS += $(COINDIR)\lib\coin2d.lib 
+  LIBS += ../../bin/SoQtViewerd.lib
+}
+
+CONFIG(release, debug|release){
+  TARGET = QtViewer
+  LIBS += $(COINDIR)\lib\coin2.lib 
+  LIBS += ../../bin/SoQtViewer.lib
+}
 
 # Input
 SOURCES += main.cpp
