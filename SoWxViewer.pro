@@ -1,7 +1,8 @@
 TEMPLATE = lib
 CONFIG += dll debug
 QT     += opengl
-QT     -= qt
+CONFIG -= qt
+
 DEFINES += COIN_DLL SOVIEWER_DLL WXUSINGDLL WXDEBUG
 
 DEPENDPATH += . \
