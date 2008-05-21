@@ -1,18 +1,20 @@
 TEMPLATE = lib
-CONFIG += dll
+win32: CONFIG += dll
 QT     += opengl
 DEFINES += COIN_DLL SOVIEWER_DLL
 
 CONFIG(debug, debug|release){
   TARGET = SoQtViewerd
 
-  LIBS += $(COINDIR)\lib\coin2d.lib
+  win32: LIBS += $(COINDIR)\lib\coin2d.lib
+  unix:  LIBS += -lCoin
 }
 
 CONFIG(release, debug|release){
   TARGET = SoQtViewer
 
-  LIBS += $(COINDIR)\lib\coin2.lib
+  win32: LIBS += $(COINDIR)\lib\coin2.lib
+  unix:  LIBS += -lCoin
 }
 
 DEPENDPATH += . \
