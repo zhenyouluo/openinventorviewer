@@ -80,7 +80,7 @@ void SoQtViewer::setSceneGraph(SoNode * a_new_scene)
     SoSearchAction sa;
     sa.setType(SoCamera::getClassTypeId());
     sa.setSearchingAll(false);
-    sa.apply(m_p_rootGraph);
+    sa.apply(a_new_scene);
 
     if (sa.getPath()){
         m_p_camera = (SoCamera*)((SoFullPath *)sa.getPath())->getTail();
