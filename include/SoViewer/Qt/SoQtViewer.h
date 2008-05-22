@@ -1,6 +1,6 @@
 /*
 _______________________________________________________________________
-__________________________ G E O M E T R Y ____________________________
+__________________________ S O V I E W E R ____________________________
 |
 | THIS FILE IS PART OF THE SOVIEWER LIBRARY.
 | USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     
@@ -79,7 +79,7 @@ private:
     SoDirectionalLight * m_p_directionalLight;
 
     SbVec2f              m_startDrag;
-    bool				 m_viewing;
+    bool                 m_viewing;
 
     SoMouseButtonEvent::Button m_mouseButton;
 };
