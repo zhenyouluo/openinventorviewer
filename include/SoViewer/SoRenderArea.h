@@ -43,6 +43,10 @@ private:
     int m_delta;
 };
 
+/** The SoRenderArea interface adds scenegraph handling and event management.
+Application programmers will not use this class directly, but rather through the implementation of either its direct descendant; 
+SoQtRenderArea, SoWxRenderArea, or through one of the "rapid application development"-style viewer subclasses.
+*/
 class SOVIEWER_API SoRenderArea
 {
 public:
@@ -84,11 +88,11 @@ protected:
     virtual void soResizeEvent(int width, int height);
     virtual void soPaintEvent();
 
-    SoSceneManager     * m_p_scene_manager;
-    SoKeyboardEvent    * m_keyboard_event;
-    SoMouseButtonEvent * m_mouse_button_event;
-    SoLocation2Event   * m_location_event;
-    SoWheelEvent	   * m_wheel_event;
+    SoSceneManager      * m_p_scene_manager;
+    SoKeyboardEvent     * m_keyboard_event;
+    SoMouseButtonEvent  * m_mouse_button_event;
+    SoLocation2Event    * m_location_event;
+    SoWheelEvent        * m_wheel_event;
 
     static void renderCallback(void *userData, SoSceneManager *mgr);
 };
