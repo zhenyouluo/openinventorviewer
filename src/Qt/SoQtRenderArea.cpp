@@ -1,6 +1,6 @@
 /*
 _______________________________________________________________________
-__________________________ G E O M E T R Y ____________________________
+__________________________ S O V I E W E R ____________________________
 |
 | THIS FILE IS PART OF THE SOVIEWER LIBRARY.
 | USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     
@@ -20,7 +20,7 @@ _______________________________________________________________________
 unsigned int SoQtRenderArea::m_cache_context = 19720408;
 
 SoQtRenderArea::SoQtRenderArea(QWidget *parent)
-: QGLWidget(parent)
+: QGLWidget(parent), SoRenderArea()
 {
     setMouseTracking( true );
 

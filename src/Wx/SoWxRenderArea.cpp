@@ -1,6 +1,6 @@
 /*
 _______________________________________________________________________
-__________________________ G E O M E T R Y ____________________________
+__________________________ S O V I E W E R ____________________________
 |
 | THIS FILE IS PART OF THE SOVIEWER LIBRARY.
 | USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     
@@ -44,7 +44,7 @@ END_EVENT_TABLE()
 
 SoWxRenderArea::SoWxRenderArea(wxWindow *parent, wxWindowID id,
                                const wxPoint& pos, const wxSize& size, long style, const wxString& name)
-                               : wxGLCanvas(parent, id, pos, size, style|wxFULL_REPAINT_ON_RESIZE, name)
+                               : wxGLCanvas(parent, id, pos, size, style|wxFULL_REPAINT_ON_RESIZE, name), SoRenderArea()
 {
     //m_p_scene_manager->getGLRenderAction()->setCacheContext(m_cache_context++);
 

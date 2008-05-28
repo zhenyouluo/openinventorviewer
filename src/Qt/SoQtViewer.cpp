@@ -1,6 +1,6 @@
 /*
 _______________________________________________________________________
-__________________________ G E O M E T R Y ____________________________
+__________________________ S O V I E W E R ____________________________
 |
 | THIS FILE IS PART OF THE SOVIEWER LIBRARY.
 | USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     
@@ -92,8 +92,9 @@ void SoQtViewer::setSceneGraph(SoNode * a_new_scene)
             m_p_camera = new SoOrthographicCamera;
 
         m_p_rootGraph->addChild(m_p_camera);
+        m_p_rootGraph->addChild(m_p_directionalLight);
     }
-    m_p_rootGraph->addChild(m_p_directionalLight);
+    
     m_p_rootGraph->addChild(a_new_scene);
 
     m_p_sceneGraph = a_new_scene;
