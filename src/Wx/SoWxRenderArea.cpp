@@ -220,7 +220,13 @@ SoKeyboardEvent::Key SoWxRenderArea::translateKey( wxKeyEvent& e )
     case WXK_RETURN:	event = SoKeyboardEvent::RETURN; break;
     case WXK_ESCAPE:	event = SoKeyboardEvent::ESCAPE; break;
     case WXK_SPACE:	event = SoKeyboardEvent::SPACE; break;
-    case WXK_DELETE:	event = SoKeyboardEvent::KEY_DELETE; break;
+    // Avoid problem with Microsoft Visual C++ Win32 API headers (yes,
+    // they actually #define DELETE in their WINNT.H header file).
+#ifdef DELETE
+    case WXK_DELETE: event = SoKeyboardEvent::KEY_DELETE; break;
+#else
+    case WXK_DELETE: event = SoKeyboardEvent::DELETE; break;
+#endif
     case WXK_START: break;
     case WXK_LBUTTON: break;
     case WXK_RBUTTON: break;
