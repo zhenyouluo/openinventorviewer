@@ -31,6 +31,7 @@ protected:
 
     void initializeGL();
     void OnTimerEvent(wxTimerEvent& event);
+    void OnIdleEvent(wxIdleEvent& event);
     void OnKeyDown(wxKeyEvent& event);
     void OnKeyUp(wxKeyEvent& event); 
     void OnMousePress(wxMouseEvent& event);
