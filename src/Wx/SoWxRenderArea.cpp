@@ -39,6 +39,7 @@ EVT_LEFT_UP(SoWxRenderArea::OnMouseRelease)
 EVT_MIDDLE_UP(SoWxRenderArea::OnMouseRelease)
 EVT_RIGHT_UP(SoWxRenderArea::OnMouseRelease)
 EVT_TIMER(TIMER_ID, SoWxRenderArea::OnTimerEvent)
+EVT_IDLE(SoWxRenderArea::OnIdleEvent)
 END_EVENT_TABLE()
 
 
@@ -65,7 +66,23 @@ void SoWxRenderArea::soRenderCallback()
 void SoWxRenderArea::OnTimerEvent(wxTimerEvent& event)
 {
     SoDB::getSensorManager()->processTimerQueue();
-    SoDB::getSensorManager()->processDelayQueue(TRUE);
+
+    // Timer sensors are set up to trigger at specific, absolute times. 
+    SbTime nextTimerSensor;
+    if (SoDB::getSensorManager()->isTimerSensorPending(nextTimerSensor)) {
+        int interval = (nextTimerSensor - SbTime::getTimeOfDay()).getMsecValue();
+
+        m_time.Start( (interval <= 0) ? 1 :  interval);
+    }
+}
+
+void SoWxRenderArea::OnIdleEvent(wxIdleEvent & event)
+{
+    // Delay sensors trigger when the application is otherwise idle.
+    SoDB::getSensorManager()->processDelayQueue(true);
+
+    if (SoDB::getSensorManager()->isDelaySensorPending())
+        event.RequestMore();
 }
 
 void SoWxRenderArea::OnKeyDown(wxKeyEvent& e)
@@ -135,10 +152,10 @@ void SoWxRenderArea::OnMouseRelease(wxMouseEvent& e)
 {
     switch( e.GetButton() )
     {
-    case 1: m_mouse_button_event->setButton(SoMouseButtonEvent::BUTTON1); break;
-    case 2:	m_mouse_button_event->setButton(SoMouseButtonEvent::BUTTON2); break;
-    case 3:	m_mouse_button_event->setButton(SoMouseButtonEvent::BUTTON3); break;
-    default:m_mouse_button_event->setButton(SoMouseButtonEvent::ANY);     break;
+    case 1:     m_mouse_button_event->setButton(SoMouseButtonEvent::BUTTON1); break;
+    case 2:     m_mouse_button_event->setButton(SoMouseButtonEvent::BUTTON2); break;
+    case 3:     m_mouse_button_event->setButton(SoMouseButtonEvent::BUTTON3); break;
+    default:    m_mouse_button_event->setButton(SoMouseButtonEvent::ANY);     break;
     } 
 
     m_mouse_button_event->setTime(SbTime(e.GetTimestamp() / 1000.0));
@@ -220,8 +237,8 @@ SoKeyboardEvent::Key SoWxRenderArea::translateKey( wxKeyEvent& e )
     case WXK_RETURN:	event = SoKeyboardEvent::RETURN; break;
     case WXK_ESCAPE:	event = SoKeyboardEvent::ESCAPE; break;
     case WXK_SPACE:	event = SoKeyboardEvent::SPACE; break;
-    // Avoid problem with Microsoft Visual C++ Win32 API headers (yes,
-    // they actually #define DELETE in their WINNT.H header file).
+        // Avoid problem with Microsoft Visual C++ Win32 API headers (yes,
+        // they actually #define DELETE in their WINNT.H header file).
 #ifdef DELETE
     case WXK_DELETE: event = SoKeyboardEvent::KEY_DELETE; break;
 #else
