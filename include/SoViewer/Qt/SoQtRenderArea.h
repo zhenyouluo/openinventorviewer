@@ -57,6 +57,9 @@ private:
     QTime                m_time;
 
     SoKeyboardEvent::Key translateKey( QKeyEvent * e );
+
+    int m_timerSensorId;
+    int m_delaySensorId;
 };
 
 #endif // _SOQTRENDERAREA_H_

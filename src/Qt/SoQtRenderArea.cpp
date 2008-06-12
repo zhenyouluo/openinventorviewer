@@ -32,7 +32,9 @@ SoQtRenderArea::SoQtRenderArea(QWidget *parent)
 
     m_p_scene_manager->getGLRenderAction()->setCacheContext(m_cache_context++);
 
-    startTimer( 1 );
+    m_timerSensorId = startTimer( 1 );
+    m_delaySensorId = startTimer( 0 ); //If interval is 0, then the timer event occurs once every time there are no more window system events to process.
+
     m_time.start();
 }
 
@@ -68,10 +70,25 @@ void SoQtRenderArea::paintGL()
     soPaintEvent();
 }
 
-void SoQtRenderArea::timerEvent( QTimerEvent * )
+void SoQtRenderArea::timerEvent( QTimerEvent * event )
 {
-    SoDB::getSensorManager()->processTimerQueue();
-    SoDB::getSensorManager()->processDelayQueue(TRUE);
+    if(event->timerId() == m_timerSensorId){
+        SoDB::getSensorManager()->processTimerQueue();
+
+        // Timer sensors are set up to trigger at specific, absolute times. 
+        SbTime nextTimerSensor;
+        if (SoDB::getSensorManager()->isTimerSensorPending(nextTimerSensor)) {
+            int interval = (nextTimerSensor - SbTime::getTimeOfDay()).getMsecValue();
+
+            killTimer(m_timerSensorId);
+            m_timerSensorId = startTimer( (interval <= 0) ? 1 :  interval);
+        }
+    }
+
+    if(event->timerId() == m_delaySensorId){
+        // Delay sensors trigger when the application is otherwise idle.
+        SoDB::getSensorManager()->processDelayQueue(true);
+    }
 }
 
 void SoQtRenderArea::keyPressEvent( QKeyEvent * e )
