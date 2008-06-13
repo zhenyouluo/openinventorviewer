@@ -18,9 +18,50 @@ _______________________________________________________________________
 #endif
 
 unsigned int SoQtRenderArea::m_cache_context = 19720408;
+#if QT_VERSION >= 0x040000 
+SoQtRenderArea::SoQtRenderArea( QWidget * parent, const QGLWidget * shareWidget, Qt::WindowFlags f)
+: QGLWidget(parent, shareWidget, f), SoRenderArea()
+{
+    commonInit();
+}
 
-SoQtRenderArea::SoQtRenderArea(QWidget *parent)
-: QGLWidget(parent), SoRenderArea()
+SoQtRenderArea::SoQtRenderArea( QGLContext * context, QWidget * parent, const QGLWidget * shareWidget, Qt::WindowFlags f)
+: QGLWidget(context, parent, shareWidget, f), SoRenderArea()
+{
+    commonInit();
+}
+
+SoQtRenderArea::SoQtRenderArea( const QGLFormat & format, QWidget * parent, const QGLWidget * shareWidget, Qt::WindowFlags f)
+: QGLWidget(format, parent, shareWidget, f), SoRenderArea()
+{
+    commonInit();
+}
+#else
+SoQtRenderArea::SoQtRenderArea( QWidget * parent, const char * name, const QGLWidget * shareWidget, WFlags f) 
+: QGLWidget(parent, name, shareWidget, f), SoRenderArea()
+{
+    commonInit();  
+}
+
+SoQtRenderArea::SoQtRenderArea( QGLContext * context, QWidget * parent, const char * name, const QGLWidget * shareWidget, WFlags f )
+: QGLWidget(context, parent, name, shareWidget, f), SoRenderArea()
+{
+    commonInit();  
+}
+
+SoQtRenderArea::SoQtRenderArea( const QGLFormat & format, QWidget * parent, const char * name, const QGLWidget * shareWidget, WFlags f)
+: QGLWidget(format, parent, name, shareWidget, f), SoRenderArea()
+{
+    commonInit();  
+}
+#endif
+
+SoQtRenderArea::~SoQtRenderArea()
+{ 
+
+}
+
+void SoQtRenderArea::commonInit()
 {
     setMouseTracking( true );
 
@@ -36,11 +77,6 @@ SoQtRenderArea::SoQtRenderArea(QWidget *parent)
     m_delaySensorId = startTimer( 0 ); //If interval is 0, then the timer event occurs once every time there are no more window system events to process.
 
     m_time.start();
-}
-
-SoQtRenderArea::~SoQtRenderArea()
-{ 
-
 }
 
 void SoQtRenderArea::soRenderCallback()
@@ -87,6 +123,7 @@ void SoQtRenderArea::timerEvent( QTimerEvent * event )
 
     if(event->timerId() == m_delaySensorId){
         // Delay sensors trigger when the application is otherwise idle.
+        SoDB::getSensorManager()->processTimerQueue();
         SoDB::getSensorManager()->processDelayQueue(true);
     }
 }

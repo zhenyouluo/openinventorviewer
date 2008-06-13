@@ -33,7 +33,15 @@ class SOVIEWER_API SoQtRenderArea : public QGLWidget, public SoRenderArea
     Q_OBJECT
 
 public:
-    SoQtRenderArea(QWidget *parent=0);
+#if QT_VERSION >= 0x040000 
+    SoQtRenderArea( QWidget * parent = 0, const QGLWidget * shareWidget = 0, Qt::WindowFlags f = 0 );
+    SoQtRenderArea( QGLContext * context, QWidget * parent = 0, const QGLWidget * shareWidget = 0, Qt::WindowFlags f = 0 );
+    SoQtRenderArea( const QGLFormat & format, QWidget * parent = 0, const QGLWidget * shareWidget = 0, Qt::WindowFlags f = 0 );
+#else    
+    SoQtRenderArea( QWidget * parent = 0, const char * name = 0, const QGLWidget * shareWidget = 0, WFlags f = 0 ); 
+    SoQtRenderArea( QGLContext * context, QWidget * parent, const char * name = 0, const QGLWidget * shareWidget = 0, WFlags f = 0 );
+    SoQtRenderArea( const QGLFormat & format, QWidget * parent = 0, const char * name = 0, const QGLWidget * shareWidget = 0, WFlags f = 0 );
+#endif
     virtual ~SoQtRenderArea();
 
     // This method should be overridden due to the same method name existence in QWidget.
@@ -52,6 +60,8 @@ protected:
     virtual void mouseReleaseEvent( QMouseEvent * e );
     virtual void wheelEvent( QWheelEvent * e );
 private:
+    void commonInit();
+
     static unsigned int  m_cache_context;
 
     QTime                m_time;
