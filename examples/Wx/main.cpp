@@ -14,6 +14,7 @@
 
 #include <SoViewer/Wx/SoWxViewer.h>
 
+#include <Inventor/SbColor.h>
 #include <Inventor/nodes/SoCube.h>
 #include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/manips/SoTrackballManip.h>

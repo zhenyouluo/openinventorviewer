@@ -4,6 +4,7 @@
 #   include <qapplication.h>
 #endif
 
+#include <Inventor/SbColor.h>
 #include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/nodes/SoCube.h>
 #include <Inventor/manips/SoTrackballManip.h>
