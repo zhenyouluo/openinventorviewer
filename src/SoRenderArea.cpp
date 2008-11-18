@@ -16,6 +16,10 @@ _______________________________________________________________________
 #include <Inventor/nodekits/SoNodeKit.h> 
 #include <Inventor/SoInteraction.h>
 
+#ifdef __COIN__
+#	include <Inventor/elements/SoGLCacheContextElement.h>
+#endif
+
 SO_EVENT_SOURCE(SoWheelEvent);
 
 void SoRenderArea::renderCallback(void *userData, SoSceneManager *)
@@ -35,7 +39,8 @@ SoRenderArea::SoRenderArea()
     m_wheel_event = new SoWheelEvent;
 
     m_p_scene_manager = new SoSceneManager;
-    m_p_scene_manager->setBackgroundColor(SbColor(0.0, 0.0, 0.0)); //BLACK COLOR
+	m_p_scene_manager->getGLRenderAction()->setCacheContext( this->getCacheContextId() );
+    m_p_scene_manager->setBackgroundColor(SbColor(0.0f, 0.0f, 0.0f)); //BLACK COLOR
     m_p_scene_manager->setRenderCallback(renderCallback, this);
 }
 
@@ -64,6 +69,16 @@ void SoRenderArea::setSceneGraph(SoNode * a_new_scene)
     m_p_scene_manager->activate();
 
     m_p_scene_manager->scheduleRedraw();
+}
+
+unsigned int SoRenderArea::getCacheContextId() const
+{
+#ifdef __COIN__
+	return SoGLCacheContextElement::getUniqueCacheContext();
+#else
+	static unsigned int s_cache_context = 19720408;
+	return s_cache_context++;
+#endif
 }
 
 void SoRenderArea::soKeyPressEvent( SoKeyboardEvent * e)

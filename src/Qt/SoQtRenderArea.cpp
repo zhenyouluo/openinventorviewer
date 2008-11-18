@@ -17,7 +17,6 @@ _______________________________________________________________________
 #   include <QMouseEvent>
 #endif
 
-unsigned int SoQtRenderArea::m_cache_context = 19720408;
 #if QT_VERSION >= 0x040000 
 SoQtRenderArea::SoQtRenderArea( QWidget * parent, const QGLWidget * shareWidget, Qt::WindowFlags f)
 : QGLWidget(parent, shareWidget, f), SoRenderArea()
@@ -70,8 +69,6 @@ void SoQtRenderArea::commonInit()
 #else
     setFocusPolicy(QWidget::StrongFocus);
 #endif
-
-    m_p_scene_manager->getGLRenderAction()->setCacheContext(m_cache_context++);
 
     m_timerSensorId = startTimer( 1 );
     m_delaySensorId = startTimer( 0 ); //If interval is 0, then the timer event occurs once every time there are no more window system events to process.

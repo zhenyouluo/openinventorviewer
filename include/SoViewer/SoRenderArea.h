@@ -77,6 +77,7 @@ public:
     //! Gets current viewport region to use for rendering. 
     const SbViewportRegion & getViewportRegion() const { return m_p_scene_manager->getGLRenderAction()->getViewportRegion(); }
 
+	virtual unsigned int getCacheContextId() const;
 protected:
     virtual void soKeyPressEvent( SoKeyboardEvent * e);
     virtual void soKeyReleaseEvent( SoKeyboardEvent * e );

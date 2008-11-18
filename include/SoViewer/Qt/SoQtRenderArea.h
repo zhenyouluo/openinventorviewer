@@ -62,8 +62,6 @@ protected:
 private:
     void commonInit();
 
-    static unsigned int  m_cache_context;
-
     QTime                m_time;
 
     SoKeyboardEvent::Key translateKey( QKeyEvent * e );
