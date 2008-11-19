@@ -1,19 +1,17 @@
 TEMPLATE = lib
+TARGET = SoQtViewer
 win32: CONFIG += dll
 QT     += opengl
 DEFINES += COIN_DLL SOVIEWER_DLL
 
 CONFIG(debug, debug|release){
-  TARGET = SoQtViewerd
+  TARGET = $$join(TARGET,,,d)
 
-  win32: LIBS += $(COINDIR)\lib\coin2d.lib
+  win32: LIBS += $(COINDIR)\lib\coin3d.lib
   unix:  LIBS += -lCoin
-}
-
-CONFIG(release, debug|release){
-  TARGET = SoQtViewer
-
-  win32: LIBS += $(COINDIR)\lib\coin2.lib
+} else {
+  
+  win32: LIBS += $(COINDIR)\lib\coin3.lib
   unix:  LIBS += -lCoin
 }
 
@@ -24,7 +22,8 @@ DEPENDPATH += . \
               src\Qt
 
 INCLUDEPATH += . \
-	      include
+	      include \
+		$(COINDIR)\include
 
 # Input
 HEADERS += include/SoViewer/SoRenderArea.h \

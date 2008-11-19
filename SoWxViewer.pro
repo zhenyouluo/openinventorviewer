@@ -1,4 +1,6 @@
 TEMPLATE = lib
+TARGET = SoWxViewer
+
 CONFIG += dll opengl 
 CONFIG -= qt
 
@@ -6,33 +8,31 @@ DEFINES += COIN_DLL SOVIEWER_DLL WXUSINGDLL
 
 CONFIG(debug, debug|release){
   DEFINES += WXDEBUG
-  TARGET = SoWxViewerd
+  TARGET = $$join(TARGET,,,d) 
 
-  LIBS += $(COINDIR)\lib\coin2d.lib
+  LIBS += $(COINDIR)\lib\coin3d.lib
+  LIBS += -L$(WXWIN)\lib\vc_dll\
 
-  LIBS += $(WXWIN)\lib\vc_dll\wxmsw28d_core.lib 
-  LIBS += $(WXWIN)\lib\vc_dll\wxbase28d.lib 
-  LIBS += $(WXWIN)\lib\vc_dll\wxtiffd.lib 
-  LIBS += $(WXWIN)\lib\vc_dll\wxjpegd.lib 
-  LIBS += $(WXWIN)\lib\vc_dll\wxpngd.lib 
-  LIBS += $(WXWIN)\lib\vc_dll\wxzlibd.lib 
-  LIBS += $(WXWIN)\lib\vc_dll\wxregexd.lib 
-  LIBS += $(WXWIN)\lib\vc_dll\wxexpatd.lib
-}
+  LIBS += wxmsw28d_core.lib 
+  LIBS += wxbase28d.lib 
+  LIBS += wxtiffd.lib 
+  LIBS += wxjpegd.lib 
+  LIBS += wxpngd.lib 
+  LIBS += wxzlibd.lib 
+  LIBS += wxregexd.lib 
+  LIBS += wxexpatd.lib
+} else {
+  LIBS += $(COINDIR)\lib\coin3.lib
+  LIBS += -L$(WXWIN)\lib\vc_dll\
 
-CONFIG(release,debug|release){
-  TARGET = SoWxViewer
-
-  LIBS += $(COINDIR)\lib\coin2.lib
-
-  LIBS += $(WXWIN)\lib\vc_dll\wxmsw28_core.lib 
-  LIBS += $(WXWIN)\lib\vc_dll\wxbase28.lib 
-  LIBS += $(WXWIN)\lib\vc_dll\wxtiff.lib 
-  LIBS += $(WXWIN)\lib\vc_dll\wxjpeg.lib 
-  LIBS += $(WXWIN)\lib\vc_dll\wxpng.lib 
-  LIBS += $(WXWIN)\lib\vc_dll\wxzlib.lib 
-  LIBS += $(WXWIN)\lib\vc_dll\wxregex.lib 
-  LIBS += $(WXWIN)\lib\vc_dll\wxexpat.lib
+  LIBS += wxmsw28_core.lib 
+  LIBS += wxbase28.lib 
+  LIBS += wxtiff.lib 
+  LIBS += wxjpeg.lib 
+  LIBS += wxpng.lib 
+  LIBS += wxzlib.lib 
+  LIBS += wxregex.lib 
+  LIBS += wxexpat.lib
 }
 
 DEPENDPATH += . \
@@ -43,6 +43,7 @@ DEPENDPATH += . \
 
 INCLUDEPATH += . \
 	      include \
+            $(COINDIR)\include \
 	      $(WXWIN)\include \
 	      $(WXWIN)\include\msvc
 
