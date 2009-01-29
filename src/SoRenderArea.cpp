@@ -76,6 +76,11 @@ void SoRenderArea::setGLRenderAction(SoGLRenderAction *ra)
     m_p_scene_manager->setGLRenderAction(ra); 
 }
 
+SoGLRenderAction * SoRenderArea::getGLRenderAction() const
+{ 
+    return m_p_scene_manager->getGLRenderAction(); 
+}
+
 unsigned int SoRenderArea::getCacheContextId() const
 {
 #ifdef __COIN__

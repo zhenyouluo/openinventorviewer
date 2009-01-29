@@ -19,6 +19,7 @@ _______________________________________________________________________
 #include <Inventor/nodes/SoDirectionalLight.h>
 #include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/actions/SoSearchAction.h>
+#include <Inventor/nodes/SoLocateHighlight.h>
 
 #include <Inventor/projectors/SbSphereSheetProjector.h>
 
@@ -149,6 +150,14 @@ void SoWxViewer::setViewing(bool state)
 
         SetCursor(cbitmap.ConvertToImage());
     }else SetCursor(wxCURSOR_ARROW);
+
+    // Turn off the selection indicators when we go back from picking
+    // mode into viewing mode.
+    if (m_viewing) {
+        SoGLRenderAction * action = this->getGLRenderAction();
+        if (action != NULL)
+            SoLocateHighlight::turnOffCurrentHighlight(action);
+    }
 }
 
 SbVec3f SoWxViewer::projectPoint(const SbVec2f & pt) const

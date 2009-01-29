@@ -16,6 +16,7 @@ _______________________________________________________________________
 #include <Inventor/nodes/SoDirectionalLight.h>
 #include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/actions/SoSearchAction.h>
+#include <Inventor/nodes/SoLocateHighlight.h>
 
 #include <Inventor/projectors/SbSphereSheetProjector.h>
 
@@ -152,6 +153,13 @@ void SoQtViewer::setViewing(bool state)
     if(m_viewing) setCursor((m_mouseButton == SoMouseButtonEvent::ANY) ? OpenHandCursor : ClosedHandCursor);
     else setCursor(Qt::ArrowCursor);
 #endif
+    // Turn off the selection indicators when we go back from picking
+    // mode into viewing mode.
+    if (m_viewing) {
+        SoGLRenderAction * action = this->getGLRenderAction();
+        if (action != NULL)
+            SoLocateHighlight::turnOffCurrentHighlight(action);
+    }
 }
 
 SbVec3f SoQtViewer::projectPoint(const SbVec2f & pt) const

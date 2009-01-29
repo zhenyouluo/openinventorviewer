@@ -74,6 +74,8 @@ public:
     //! Access to GL render action
     void setGLRenderAction(SoGLRenderAction *ra);
 
+    SoGLRenderAction * getGLRenderAction() const;
+
     //! Sets viewport region to use for rendering. 
     void setViewportRegion(const SbViewportRegion & a_region) { m_p_scene_manager->getGLRenderAction()->setViewportRegion(a_region); }
 
