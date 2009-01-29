@@ -297,6 +297,8 @@ void SoWxViewer::adjustCameraClippingPlanes()
     clipbox_action.apply(m_p_rootGraph);
 
     SbBox3f bbox = clipbox_action.getBoundingBox();
+    if (bbox.isEmpty())
+        return;
 
     SbSphere bSphere;
     bSphere.circumscribe(bbox);

@@ -92,9 +92,8 @@ void SoQtViewer::setSceneGraph(SoNode * a_new_scene)
             m_p_camera = new SoOrthographicCamera;
 
         m_p_rootGraph->addChild(m_p_camera);
-        m_p_rootGraph->addChild(m_p_directionalLight);
     }
-    
+    m_p_rootGraph->addChild(m_p_directionalLight);
     m_p_rootGraph->addChild(a_new_scene);
 
     m_p_sceneGraph = a_new_scene;
