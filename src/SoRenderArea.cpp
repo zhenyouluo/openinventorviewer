@@ -71,6 +71,11 @@ void SoRenderArea::setSceneGraph(SoNode * a_new_scene)
     m_p_scene_manager->scheduleRedraw();
 }
 
+void SoRenderArea::setGLRenderAction(SoGLRenderAction *ra)
+{ 
+    m_p_scene_manager->setGLRenderAction(ra); 
+}
+
 unsigned int SoRenderArea::getCacheContextId() const
 {
 #ifdef __COIN__

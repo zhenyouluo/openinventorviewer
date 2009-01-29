@@ -71,6 +71,9 @@ public:
     //! Gets the normal scene manager.
     SoSceneManager * getSceneManager(){ return m_p_scene_manager; }
 
+    //! Access to GL render action
+    void setGLRenderAction(SoGLRenderAction *ra);
+
     //! Sets viewport region to use for rendering. 
     void setViewportRegion(const SbViewportRegion & a_region) { m_p_scene_manager->getGLRenderAction()->setViewportRegion(a_region); }
 

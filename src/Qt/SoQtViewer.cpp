@@ -300,6 +300,9 @@ void SoQtViewer::adjustCameraClippingPlanes()
 
     SbBox3f bbox = clipbox_action.getBoundingBox();
 
+    if (bbox.isEmpty())
+        return;
+
     SbSphere bSphere;
     bSphere.circumscribe(bbox);
 
