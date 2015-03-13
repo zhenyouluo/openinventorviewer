@@ -2,6 +2,8 @@
 
 SoQtViewer / SoWxViewer class are OpenInventor 3D-model examination viewer for Qt 3.x/4.x and wxWidgets 2.8.
 
+<img src="https://raw.github.com/mojocorp/openinventorviewer/master/SoQtViewer2.jpg" >
+
 This class is the viewer considered to be the most "general purpose" viewer, and it is often used in rapid prototyping to examine simple models aswell as complete scenes.
 
 * hold down left mouse button and move mouse pointer to rotate the camera around it's current focal point
