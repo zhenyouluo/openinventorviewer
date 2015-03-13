@@ -1,6 +1,6 @@
 # Open Inventor Viewer
 
-SoQtViewer / SoWxViewer class are OpenInventor 3D-model examination viewer for Qt 3.x/4.x and wxWidgets 2.8.
+SoQtViewer / SoWxViewer classes are OpenInventor 3D-model examination viewer for Qt 3.x/4.x and wxWidgets 2.8.
 
 <img src="https://raw.github.com/mojocorp/openinventorviewer/master/SoQtViewer2.jpg" >
 
